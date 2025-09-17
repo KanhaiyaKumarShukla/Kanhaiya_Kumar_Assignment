@@ -20,6 +20,12 @@ import com.example.kanhaiya_kumar_assignment.presentation.components.ReportSumma
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.kanhaiya_kumar_assignment.domain.model.CategoryTotal
 import com.example.kanhaiya_kumar_assignment.domain.model.DailyTotal
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import kotlinx.coroutines.launch
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,18 +38,24 @@ fun ReportsScreen(
     val dailyTotals by viewModel.dailyTotals.collectAsState()
     
     var showExportDialog by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
-    
     LaunchedEffect(uiState.exportSuccess) {
         if (uiState.exportSuccess) {
-            // Could show a snackbar here
+            scope.launch {
+                snackbarHostState.showSnackbar("Export completed! Ready to share.")
+            }
         }
     }
     
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("Reports") },
+                scrollBehavior = scrollBehavior,
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -55,7 +67,8 @@ fun ReportsScreen(
                     }
                 }
             )
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -144,7 +157,7 @@ fun ReportsScreen(
             }
             
             // Export Status
-            if (uiState.isExporting) {
+            AnimatedVisibility(visible = uiState.isExporting, enter = fadeIn(), exit = fadeOut()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
@@ -170,7 +183,7 @@ fun ReportsScreen(
                 }
             }
             
-            if (uiState.exportSuccess) {
+            AnimatedVisibility(visible = uiState.exportSuccess, enter = fadeIn(), exit = fadeOut()) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
@@ -202,28 +215,55 @@ fun ReportsScreen(
     
     // Export Dialog
     if (showExportDialog) {
+        var tempFormat by remember { mutableStateOf(uiState.exportFormat) }
+
         AlertDialog(
             onDismissRequest = { showExportDialog = false },
+            icon = { Icon(Icons.Filled.FileDownload, contentDescription = null) },
             title = { Text("Export Report") },
             text = {
-                Column {
-                    Text("Choose export format:")
-                    Spacer(modifier = Modifier.height(16.dp))
-                    
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 280.dp)
+                        .verticalScroll(rememberScrollState())
+                ) {
+                    Text(
+                        text = "Choose export format",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+
                     ExportFormat.values().forEach { format ->
-                        TextButton(
-                            onClick = {
-                                viewModel.simulateExport(format)
-                                showExportDialog = false
-                            },
-                            modifier = Modifier.fillMaxWidth()
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectable(
+                                    selected = tempFormat == format,
+                                    onClick = { tempFormat = format }
+                                )
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(format.displayName)
+                            RadioButton(
+                                selected = tempFormat == format,
+                                onClick = { tempFormat = format }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(text = format.displayName)
                         }
                     }
                 }
             },
-            confirmButton = {},
+            confirmButton = {
+                Button(onClick = {
+                    tempFormat?.let { viewModel.simulateExport(it) }
+                    showExportDialog = false
+                }) {
+                    Text("Export")
+                }
+            },
             dismissButton = {
                 TextButton(onClick = { showExportDialog = false }) {
                     Text("Cancel")

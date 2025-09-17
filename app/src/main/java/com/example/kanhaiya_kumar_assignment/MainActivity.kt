@@ -16,6 +16,8 @@ import com.example.kanhaiya_kumar_assignment.presentation.navigation.ExpenseNavi
 import com.example.kanhaiya_kumar_assignment.presentation.theme.ThemeViewModel
 import com.example.kanhaiya_kumar_assignment.ui.theme.Kanhaiya_Kumar_AssignmentTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.compose.runtime.SideEffect
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -27,6 +29,21 @@ class MainActivity : ComponentActivity() {
             val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
             
             Kanhaiya_Kumar_AssignmentTheme(darkTheme = isDarkTheme) {
+                val systemUiController = rememberSystemUiController()
+                val colorScheme = MaterialTheme.colorScheme
+                SideEffect {
+                    // Status bar should follow the app surface color
+                    systemUiController.setStatusBarColor(
+                        color = colorScheme.surface,
+                        darkIcons = !isDarkTheme
+                    )
+                    // Navigation bar should be dark in dark theme and match surface in light theme
+                    systemUiController.setNavigationBarColor(
+                        color = colorScheme.surface,
+                        darkIcons = !isDarkTheme,
+                        navigationBarContrastEnforced = false
+                    )
+                }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

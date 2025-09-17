@@ -4,10 +4,14 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Assessment
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Inbox
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,9 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.kanhaiya_kumar_assignment.domain.model.ExpenseCategory
 import com.example.kanhaiya_kumar_assignment.presentation.components.AnimatedFAB
+import com.example.kanhaiya_kumar_assignment.presentation.components.AnimatedExpenseCard
 import com.example.kanhaiya_kumar_assignment.presentation.components.ExpenseCard
 import com.example.kanhaiya_kumar_assignment.presentation.components.ThemeToggleButton
 import com.example.kanhaiya_kumar_assignment.presentation.components.TotalSpentCard
@@ -38,11 +44,14 @@ fun ExpenseListScreen(
     val todayTotal by viewModel.todayTotal.collectAsState()
     val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
     var showFilterDialog by remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("Expense Tracker") },
+                scrollBehavior = scrollBehavior,
                 actions = {
                     ThemeToggleButton(
                         isDarkTheme = isDarkTheme,
@@ -153,6 +162,13 @@ fun ExpenseListScreen(
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        Icon(
+                            imageVector = Icons.Filled.Inbox,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.size(64.dp)
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
                         Text(
                             text = "No expenses found",
                             style = MaterialTheme.typography.titleMedium,
@@ -185,10 +201,10 @@ fun ExpenseListScreen(
                         }
                         
                         items(expenses) { expense ->
-                            ExpenseCard(
+                            AnimatedExpenseCard(
                                 expense = expense,
                                 modifier = Modifier.fillMaxWidth(),
-                                onClick = { onNavigateToDetail(expense.id) }
+                                isVisible = true
                             )
                         }
                     }
@@ -220,31 +236,52 @@ private fun FilterDialog(
     onCategorySelected: (ExpenseCategory?) -> Unit,
     onDismiss: () -> Unit
 ) {
+    var tempSelected by remember { mutableStateOf(selectedCategory) }
+
     AlertDialog(
         onDismissRequest = onDismiss,
+        icon = { Icon(Icons.Filled.FilterList, contentDescription = null) },
         title = { Text("Filter by Category") },
         text = {
-            Column {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 320.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                // All Categories option
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = tempSelected == null,
+                            onClick = { tempSelected = null }
+                        )
+                        .padding(vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = selectedCategory == null,
-                        onClick = { onCategorySelected(null) }
+                        selected = tempSelected == null,
+                        onClick = { tempSelected = null }
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("All Categories")
                 }
-                
+
                 ExpenseCategory.values().forEach { category ->
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .selectable(
+                                selected = tempSelected == category,
+                                onClick = { tempSelected = category }
+                            )
+                            .padding(vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
-                            selected = selectedCategory == category,
-                            onClick = { onCategorySelected(category) }
+                            selected = tempSelected == category,
+                            onClick = { tempSelected = category }
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(category.displayName)
@@ -253,8 +290,20 @@ private fun FilterDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Close")
+            Button(onClick = {
+                onCategorySelected(tempSelected)
+                onDismiss()
+            }) {
+                Text("Apply")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = {
+                tempSelected = null
+                onCategorySelected(null)
+                onDismiss()
+            }) {
+                Text("Clear")
             }
         }
     )

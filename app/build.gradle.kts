@@ -87,8 +87,9 @@ dependencies {
     // DataStore
     implementation(libs.datastore.preferences)
     
-    // Permissions
+    // Accompanist
     implementation(libs.accompanist.permissions)
+    implementation(libs.accompanist.systemuicontroller)
     
     // Image Loading
     implementation(libs.coil.compose)
