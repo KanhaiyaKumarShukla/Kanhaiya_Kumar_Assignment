@@ -2,6 +2,12 @@
 
 A comprehensive expense tracking application built with modern Android development practices, designed specifically for small business owners to digitize their daily expense management.
 
+## ⬇️ Download APK
+
+[![Download APK](https://img.shields.io/badge/Download-APK-2ea44f?style=for-the-badge&logo=android&logoColor=white)](https://drive.google.com/file/d/1eYI5cNwrFekCyIKOZRS8V-sMLkcfArc-/view?usp=drive_link)
+
+Direct link: https://drive.google.com/file/d/1eYI5cNwrFekCyIKOZRS8V-sMLkcfArc-/view?usp=drive_link
+
 ## 📦 Submission Deliverables
 
 This repository includes all the required submission artifacts in the project root:
@@ -11,7 +17,7 @@ This repository includes all the required submission artifacts in the project ro
 - **AI Usage Summary**: see the "AI Usage Summary" section below (3–5 lines)
 - **Prompt Logs**: `PROMPT_LOGS.md`
 - **Checklist of Features Implemented**: `FEATURES_CHECKLIST.md`
-- **APK Download Link**: `docs/APK_LINK.md` (update with your public link)
+- **APK Download Link**: `docs/APK_LINK.md` (also linked above in this README)
 - **Screenshots**: `docs/screenshots/` folder
 - **Resume**: add `resume.pdf` in the root (a placeholder `resume.txt` is provided)
 - **Full Source Code**: this repository (Jetpack Compose UI, MVVM, clean & modular)
@@ -121,84 +127,115 @@ This project extensively leveraged AI tools for:
 
 ## 📸 Screenshots
 
-Below is a curated gallery of app screenshots (light and dark where available). All images are stored in the `images/` folder in the repository root.
+Below is a curated gallery of app screenshots (light and dark where available). Images are centered and sized for readability. Source files live under `images/` in the repo root.
 
 ### 1) Home — Expense Tracker
 - Description: Main expense list with today’s total, grouping, filters, and animated FAB.
 
-Light:
-
-![Home (Light)](images/home_expense_tracker_light.jpg)
-
-Dark:
-
-![Home (Dark)](images/home_expense_tracker_dark.jpg)
+<table>
+  <tr>
+    <th>Light</th>
+    <th>Dark</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="images/home_expense_tracker_light.jpg" width="360" alt="Home (Light)"></td>
+    <td align="center"><img src="images/home_expense_tracker_dark.jpg" width="360" alt="Home (Dark)"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Home (Light)</sub></td>
+    <td align="center"><sub>Home (Dark)</sub></td>
+  </tr>
+  </table>
 
 ---
 
 ### 2) Category Picker (Filter Dialog)
 - Description: Modern M3 dialog with icon, radio selection, scroll, Apply/Clear actions.
 
-Light:
-
-![Category Picker (Light)](images/category_picker_light.jpg)
-
-Dark:
-
-![Category Picker (Dark)](images/category_picker_dark.jpg)
+<table>
+  <tr>
+    <th>Light</th>
+    <th>Dark</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="images/category_picker_light.jpg" width="360" alt="Category Picker (Light)"></td>
+    <td align="center"><img src="images/category_picker_dark.jpg" width="360" alt="Category Picker (Dark)"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Category Picker (Light)</sub></td>
+    <td align="center"><sub>Category Picker (Dark)</sub></td>
+  </tr>
+</table>
 
 ---
 
 ### 3) Filtered Expenses by Category
 - Description: Expenses view filtered to a specific category with clear grouping.
 
-Light:
-
-![Filtered Category Expenses (Light)](images/flitered_category_expenses_light.jpg)
-
-Dark:
-
-![Filtered Category Expenses (Dark)](images/flitered_category_expenses_dark.jpg)
+<table>
+  <tr>
+    <th>Light</th>
+    <th>Dark</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="images/flitered_category_expenses_light.jpg" width="360" alt="Filtered Category Expenses (Light)"></td>
+    <td align="center"><img src="images/flitered_category_expenses_dark.jpg" width="360" alt="Filtered Category Expenses (Dark)"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Filtered Category Expenses (Light)</sub></td>
+    <td align="center"><sub>Filtered Category Expenses (Dark)</sub></td>
+  </tr>
+</table>
 
 ---
 
 ### 4) Reports — 7 Days Overview
 - Description: Category-wise and daily trend charts with polished cards.
 
-Light:
-
-![7 Days Report (Light)](images/seven_days_report_light.jpg)
-
-Dark:
-
-![7 Days Report (Dark)](images/seven_days_report_dark.jpg)
+<table>
+  <tr>
+    <th>Light</th>
+    <th>Dark</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="images/seven_days_report_light.jpg" width="360" alt="7 Days Report (Light)"></td>
+    <td align="center"><img src="images/seven_days_report_dark.jpg" width="360" alt="7 Days Report (Dark)"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>7 Days Report (Light)</sub></td>
+    <td align="center"><sub>7 Days Report (Dark)</sub></td>
+  </tr>
+</table>
 
 ---
 
 ### 5) Today’s Expense — Category-wise Summary
 - Description: Snapshot of today’s spending broken down by category.
 
-Light:
-
-![Today Category-wise (Light)](images/todays_expense_categor_wise_expense_light.jpg)
-
-Dark:
-
-![Today Category-wise (Dark)](images/todays_expense_categor_wise_expense_dark.jpg)
+<table>
+  <tr>
+    <th>Light</th>
+    <th>Dark</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="images/todays_expense_categor_wise_expense_light.jpg" width="360" alt="Today Category-wise (Light)"></td>
+    <td align="center"><img src="images/todays_expense_categor_wise_expense_dark.jpg" width="360" alt="Today Category-wise (Dark)"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Today Category-wise (Light)</sub></td>
+    <td align="center"><sub>Today Category-wise (Dark)</sub></td>
+  </tr>
+</table>
 
 ---
 
 ### 6) Export Report (Format Picker)
 - Description: Export format selection dialog with radio buttons and Export/Cancel actions.
 
-Light:
-
-![Export Report Picker (Light)](images/export_report_picker_light.jpg)
-
-Dark:
-
-_Not applicable_
-
----
+<p align="center">
+  <img src="images/export_report_picker_light.jpg" width="360" alt="Export Report Picker (Light)">
+  <br/>
+  <sub>Export Report Picker (Light)</sub>
+</p>
 
 **Built with ❤️ using AI-first development approach**
