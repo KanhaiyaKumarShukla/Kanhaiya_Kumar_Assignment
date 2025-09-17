@@ -2,6 +2,22 @@
 
 A comprehensive expense tracking application built with modern Android development practices, designed specifically for small business owners to digitize their daily expense management.
 
+## 📦 Submission Deliverables
+
+This repository includes all the required submission artifacts in the project root:
+
+- **Name**: see `NAME.txt`
+- **App Overview**: see the sections below (2–3 lines at the top of this README)
+- **AI Usage Summary**: see the "AI Usage Summary" section below (3–5 lines)
+- **Prompt Logs**: `PROMPT_LOGS.md`
+- **Checklist of Features Implemented**: `FEATURES_CHECKLIST.md`
+- **APK Download Link**: `docs/APK_LINK.md` (update with your public link)
+- **Screenshots**: `docs/screenshots/` folder
+- **Resume**: add `resume.pdf` in the root (a placeholder `resume.txt` is provided)
+- **Full Source Code**: this repository (Jetpack Compose UI, MVVM, clean & modular)
+
+Update the placeholders with your actual content before submitting.
+
 ## 🏗️ Architecture
 
 This app follows **Clean Architecture** principles with **MVVM** pattern:
@@ -105,7 +121,13 @@ This project extensively leveraged AI tools for:
 
 ## 📸 Screenshots
 
-*Screenshots will be available after building and testing the application*
+Add PNG/JPG screenshots under `docs/screenshots/` and reference them here. Example:
+
+```markdown
+![Expense List](docs/screenshots/expense_list.png)
+![Add Expense](docs/screenshots/add_expense.png)
+![Reports](docs/screenshots/reports.png)
+```
 
 ---
 
