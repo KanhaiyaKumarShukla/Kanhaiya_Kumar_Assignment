@@ -127,7 +127,7 @@ This project extensively leveraged AI tools for:
 
 ## 📸 Screenshots
 
-Below is a curated gallery of app screenshots (light and dark where available). Images are centered and sized for readability. Source files live under `images/` in the repo root.
+Below is a curated gallery of app screenshots (light and dark where available). Images are shown as device-sized thumbnails for readability. Source files live under `images/` in the repo root.
 
 ### 1) Home — Expense Tracker
 - Description: Main expense list with today’s total, grouping, filters, and animated FAB.
@@ -138,8 +138,8 @@ Below is a curated gallery of app screenshots (light and dark where available). 
     <th>Dark</th>
   </tr>
   <tr>
-    <td align="center"><img src="images/home_expense_tracker_light.jpg" width="360" alt="Home (Light)"></td>
-    <td align="center"><img src="images/home_expense_tracker_dark.jpg" width="360" alt="Home (Dark)"></td>
+    <td align="center"><a href="images/home_expense_tracker_light.jpg"><img src="images/home_expense_tracker_light.jpg" width="280" alt="Home (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
+    <td align="center"><a href="images/home_expense_tracker_dark.jpg"><img src="images/home_expense_tracker_dark.jpg" width="280" alt="Home (Dark)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>Home (Light)</sub></td>
@@ -158,8 +158,8 @@ Below is a curated gallery of app screenshots (light and dark where available). 
     <th>Dark</th>
   </tr>
   <tr>
-    <td align="center"><img src="images/category_picker_light.jpg" width="360" alt="Category Picker (Light)"></td>
-    <td align="center"><img src="images/category_picker_dark.jpg" width="360" alt="Category Picker (Dark)"></td>
+    <td align="center"><a href="images/category_picker_light.jpg"><img src="images/category_picker_light.jpg" width="280" alt="Category Picker (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
+    <td align="center"><a href="images/category_picker_dark.jpg"><img src="images/category_picker_dark.jpg" width="280" alt="Category Picker (Dark)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>Category Picker (Light)</sub></td>
@@ -178,8 +178,8 @@ Below is a curated gallery of app screenshots (light and dark where available). 
     <th>Dark</th>
   </tr>
   <tr>
-    <td align="center"><img src="images/flitered_category_expenses_light.jpg" width="360" alt="Filtered Category Expenses (Light)"></td>
-    <td align="center"><img src="images/flitered_category_expenses_dark.jpg" width="360" alt="Filtered Category Expenses (Dark)"></td>
+    <td align="center"><a href="images/flitered_category_expenses_light.jpg"><img src="images/flitered_category_expenses_light.jpg" width="280" alt="Filtered Category Expenses (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
+    <td align="center"><a href="images/flitered_category_expenses_dark.jpg"><img src="images/flitered_category_expenses_dark.jpg" width="280" alt="Filtered Category Expenses (Dark)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>Filtered Category Expenses (Light)</sub></td>
@@ -198,8 +198,8 @@ Below is a curated gallery of app screenshots (light and dark where available). 
     <th>Dark</th>
   </tr>
   <tr>
-    <td align="center"><img src="images/seven_days_report_light.jpg" width="360" alt="7 Days Report (Light)"></td>
-    <td align="center"><img src="images/seven_days_report_dark.jpg" width="360" alt="7 Days Report (Dark)"></td>
+    <td align="center"><a href="images/seven_days_report_light.jpg"><img src="images/seven_days_report_light.jpg" width="280" alt="7 Days Report (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
+    <td align="center"><a href="images/seven_days_report_dark.jpg"><img src="images/seven_days_report_dark.jpg" width="280" alt="7 Days Report (Dark)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>7 Days Report (Light)</sub></td>
@@ -218,8 +218,8 @@ Below is a curated gallery of app screenshots (light and dark where available). 
     <th>Dark</th>
   </tr>
   <tr>
-    <td align="center"><img src="images/todays_expense_categor_wise_expense_light.jpg" width="360" alt="Today Category-wise (Light)"></td>
-    <td align="center"><img src="images/todays_expense_categor_wise_expense_dark.jpg" width="360" alt="Today Category-wise (Dark)"></td>
+    <td align="center"><a href="images/todays_expense_categor_wise_expense_light.jpg"><img src="images/todays_expense_categor_wise_expense_light.jpg" width="280" alt="Today Category-wise (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
+    <td align="center"><a href="images/todays_expense_categor_wise_expense_dark.jpg"><img src="images/todays_expense_categor_wise_expense_dark.jpg" width="280" alt="Today Category-wise (Dark)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>Today Category-wise (Light)</sub></td>
@@ -233,7 +233,7 @@ Below is a curated gallery of app screenshots (light and dark where available). 
 - Description: Export format selection dialog with radio buttons and Export/Cancel actions.
 
 <p align="center">
-  <img src="images/export_report_picker_light.jpg" width="360" alt="Export Report Picker (Light)">
+  <a href="images/export_report_picker_light.jpg"><img src="images/export_report_picker_light.jpg" width="280" alt="Export Report Picker (Light)" style="border:1px solid #e3e3e3;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></a>
   <br/>
   <sub>Export Report Picker (Light)</sub>
 </p>
