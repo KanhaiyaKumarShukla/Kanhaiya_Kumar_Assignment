@@ -2,6 +2,12 @@
 
 A comprehensive expense tracking application built with modern Android development practices, designed specifically for small business owners to digitize their daily expense management.
 
+## ⬇️ Download APK
+
+[![Download APK](https://img.shields.io/badge/Download-APK-2ea44f?style=for-the-badge&logo=android&logoColor=white)](https://drive.google.com/file/d/1eYI5cNwrFekCyIKOZRS8V-sMLkcfArc-/view?usp=sharing)
+
+Direct link: https://drive.google.com/file/d/1eYI5cNwrFekCyIKOZRS8V-sMLkcfArc-/view?usp=sharing
+
 ## 📦 Submission Deliverables
 
 This repository includes all the required submission artifacts in the project root:
