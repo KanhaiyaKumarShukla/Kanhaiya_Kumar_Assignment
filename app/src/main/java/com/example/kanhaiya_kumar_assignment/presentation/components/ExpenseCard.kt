@@ -23,21 +23,33 @@ fun ExpenseCard(
     Card(
         modifier = modifier,
         onClick = onClick,
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Category Icon
-            Icon(
-                imageVector = getCategoryIcon(expense.category),
-                contentDescription = expense.category.displayName,
-                modifier = Modifier.size(40.dp),
-                tint = getCategoryColor(expense.category)
-            )
+            Surface(
+                color = getCategoryColor(expense.category).copy(alpha = 0.18f),
+                shape = MaterialTheme.shapes.large,
+                tonalElevation = 0.dp,
+                shadowElevation = 0.dp
+            ) {
+                Box(
+                    modifier = Modifier.size(44.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = getCategoryIcon(expense.category),
+                        contentDescription = expense.category.displayName,
+                        tint = getCategoryColor(expense.category)
+                    )
+                }
+            }
             
             Spacer(modifier = Modifier.width(16.dp))
             

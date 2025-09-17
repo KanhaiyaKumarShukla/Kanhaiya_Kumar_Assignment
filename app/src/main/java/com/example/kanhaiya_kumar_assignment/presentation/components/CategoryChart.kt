@@ -13,10 +13,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kanhaiya_kumar_assignment.domain.model.CategoryTotal
 import com.example.kanhaiya_kumar_assignment.domain.model.ExpenseCategory
+import com.example.kanhaiya_kumar_assignment.ui.theme.CategoryFood
+import com.example.kanhaiya_kumar_assignment.ui.theme.CategoryTravel
+import com.example.kanhaiya_kumar_assignment.ui.theme.CategoryStaff
+import com.example.kanhaiya_kumar_assignment.ui.theme.CategoryUtility
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -41,31 +46,47 @@ fun CategoryChart(
     
     val totalAmount = categoryTotals.sumOf { it.total }
     val colors = listOf(
-        Color(0xFF6366F1), // Indigo
-        Color(0xFF8B5CF6), // Violet
-        Color(0xFFEC4899), // Pink
-        Color(0xFFF59E0B)  // Amber
+        CategoryFood,
+        CategoryTravel,
+        CategoryStaff,
+        CategoryUtility
     )
     
     Row(
         modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        val surfaceColor = MaterialTheme.colorScheme.surface
         // Pie Chart
         Box(
             modifier = Modifier
-                .size(150.dp)
+                .size(170.dp)
                 .weight(1f),
             contentAlignment = Alignment.Center
         ) {
             Canvas(
                 modifier = Modifier.fillMaxSize()
             ) {
-                drawPieChart(
+                drawDonutChart(
                     categoryTotals = categoryTotals,
                     totalAmount = totalAmount,
                     colors = colors,
-                    size = size
+                    size = size,
+                    surfaceColor = surfaceColor
+                )
+            }
+            // Center label
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = "Total",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "₹${String.format("%.0f", totalAmount)}",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
         }
@@ -103,7 +124,7 @@ private fun LegendItem(
             modifier = Modifier
                 .size(12.dp)
                 .drawWithContent {
-                    drawRect(color = color)
+                    drawCircle(color = color)
                 }
         )
         
@@ -122,14 +143,15 @@ private fun LegendItem(
     }
 }
 
-private fun DrawScope.drawPieChart(
+private fun DrawScope.drawDonutChart(
     categoryTotals: List<CategoryTotal>,
     totalAmount: Double,
     colors: List<Color>,
-    size: Size
+    size: Size,
+    surfaceColor: Color
 ) {
     val center = Offset(size.width / 2, size.height / 2)
-    val radius = minOf(size.width, size.height) / 2 * 0.8f
+    val radius = minOf(size.width, size.height) / 2 * 0.9f
     
     var startAngle = -90f
     
@@ -147,4 +169,13 @@ private fun DrawScope.drawPieChart(
         
         startAngle += sweepAngle
     }
+
+    // Cut out the center to make a donut
+    val holeRadius = radius * 0.60f
+    drawCircle(
+        color = surfaceColor,
+        radius = holeRadius,
+        center = center,
+        style = Fill
+    )
 }

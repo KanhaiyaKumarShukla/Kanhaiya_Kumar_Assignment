@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kanhaiya_kumar_assignment.domain.model.DailyTotal
@@ -38,6 +39,10 @@ fun DailyChart(
     
     val maxAmount = dailyTotals.maxOfOrNull { it.total } ?: 0.0
     val primaryColor = MaterialTheme.colorScheme.primary
+    val gradient = Brush.verticalGradient(
+        colors = listOf(primaryColor.copy(alpha = 0.35f), Color.Transparent)
+    )
+    val gridColor = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.25f)
     
     Column(
         modifier = modifier
@@ -52,6 +57,8 @@ fun DailyChart(
                 dailyTotals = dailyTotals,
                 maxAmount = maxAmount,
                 color = primaryColor,
+                areaBrush = gradient,
+                gridColor = gridColor,
                 size = size
             )
         }
@@ -84,6 +91,8 @@ private fun DrawScope.drawLineChart(
     dailyTotals: List<DailyTotal>,
     maxAmount: Double,
     color: Color,
+    areaBrush: Brush,
+    gridColor: Color,
     size: androidx.compose.ui.geometry.Size
 ) {
     if (dailyTotals.isEmpty()) return
@@ -98,6 +107,18 @@ private fun DrawScope.drawLineChart(
         Offset(x, y)
     }
     
+    // Grid lines (horizontal)
+    val gridLines = 4
+    for (i in 0..gridLines) {
+        val y = padding + (i * chartHeight / gridLines)
+        drawLine(
+            color = gridColor,
+            start = Offset(padding, y),
+            end = Offset(padding + chartWidth, y),
+            strokeWidth = 1.dp.toPx()
+        )
+    }
+
     // Draw line
     if (points.size > 1) {
         val path = Path()
@@ -107,6 +128,18 @@ private fun DrawScope.drawLineChart(
             path.lineTo(points[i].x, points[i].y)
         }
         
+        // Area under line
+        val areaPath = Path().apply {
+            moveTo(points.first().x, padding + chartHeight)
+            lineTo(points.first().x, points.first().y)
+            for (i in 1 until points.size) {
+                lineTo(points[i].x, points[i].y)
+            }
+            lineTo(points.last().x, padding + chartHeight)
+            close()
+        }
+        drawPath(path = areaPath, brush = areaBrush)
+
         drawPath(
             path = path,
             color = color,

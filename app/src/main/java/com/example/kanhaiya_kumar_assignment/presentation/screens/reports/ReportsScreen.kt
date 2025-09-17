@@ -23,15 +23,20 @@ import com.example.kanhaiya_kumar_assignment.domain.model.DailyTotal
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import kotlinx.coroutines.launch
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import com.example.kanhaiya_kumar_assignment.presentation.components.ThemeToggleButton
+import com.example.kanhaiya_kumar_assignment.presentation.theme.ThemeViewModel
+import com.example.kanhaiya_kumar_assignment.presentation.components.AnimatedFAB
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportsScreen(
     onNavigateBack: () -> Unit,
-    viewModel: ReportsViewModel = hiltViewModel()
+    viewModel: ReportsViewModel = hiltViewModel(),
+    themeViewModel: ThemeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val categoryTotals by viewModel.categoryTotals.collectAsState()
@@ -41,6 +46,23 @@ fun ReportsScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val systemUiController = rememberSystemUiController()
+    val isDarkTheme by themeViewModel.isDarkTheme.collectAsState()
+    val useDarkIcons = !isDarkTheme
+    val systemBarColor = if (isDarkTheme) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primaryContainer
+    val topBarContainer = if (isDarkTheme) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primaryContainer
+    val topBarOnColor = if (isDarkTheme) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onPrimaryContainer
+
+    SideEffect {
+        systemUiController.setStatusBarColor(
+            color = systemBarColor,
+            darkIcons = useDarkIcons
+        )
+        systemUiController.setNavigationBarColor(
+            color = systemBarColor,
+            darkIcons = useDarkIcons
+        )
+    }
 
     LaunchedEffect(uiState.exportSuccess) {
         if (uiState.exportSuccess) {
@@ -53,8 +75,30 @@ fun ReportsScreen(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
-                title = { Text("Reports") },
+            CenterAlignedTopAppBar(
+                title = {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "Reports",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1
+                        )
+                        Text(
+                            text = "Insights for the last 7 days",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = topBarOnColor.copy(alpha = 0.8f),
+                            maxLines = 1
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = topBarContainer,
+                    scrolledContainerColor = topBarContainer,
+                    titleContentColor = topBarOnColor,
+                    actionIconContentColor = topBarOnColor,
+                    navigationIconContentColor = topBarOnColor
+                ),
                 scrollBehavior = scrollBehavior,
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
@@ -62,10 +106,20 @@ fun ReportsScreen(
                     }
                 },
                 actions = {
+                    ThemeToggleButton(
+                        isDarkTheme = isDarkTheme,
+                        onToggle = themeViewModel::toggleTheme
+                    )
                     IconButton(onClick = { showExportDialog = true }) {
                         Icon(Icons.Default.FileDownload, contentDescription = "Export")
                     }
                 }
+            )
+        },
+        floatingActionButton = {
+            AnimatedFAB(
+                onClick = { showExportDialog = true },
+                isVisible = !uiState.isExporting
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -86,7 +140,10 @@ fun ReportsScreen(
             
             // Category-wise Totals Chart
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                shape = MaterialTheme.shapes.large,
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp)
@@ -94,7 +151,8 @@ fun ReportsScreen(
                     Text(
                         text = "Category-wise Spending (Last 7 Days)",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     
@@ -122,7 +180,10 @@ fun ReportsScreen(
             
             // Daily Totals Chart
             Card(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                shape = MaterialTheme.shapes.large,
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp)
@@ -130,7 +191,8 @@ fun ReportsScreen(
                     Text(
                         text = "Daily Spending Trend (Last 7 Days)",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     
@@ -210,6 +272,9 @@ fun ReportsScreen(
                     }
                 }
             }
+
+            // Spacer to avoid content being overlapped by the FAB
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
     

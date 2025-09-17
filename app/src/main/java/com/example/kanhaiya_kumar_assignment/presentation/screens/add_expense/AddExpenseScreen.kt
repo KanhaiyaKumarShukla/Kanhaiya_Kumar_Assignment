@@ -8,6 +8,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.CurrencyRupee
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -68,7 +71,7 @@ fun AddExpenseScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Expense") },
+                title = { Text("Add Expense", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -85,44 +88,65 @@ fun AddExpenseScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Title Input
-            OutlinedTextField(
-                value = uiState.title,
-                onValueChange = viewModel::onTitleChanged,
-                label = { Text("Title") },
-                modifier = Modifier.fillMaxWidth(),
-                isError = uiState.titleError != null,
-                supportingText = uiState.titleError?.let { { Text(it) } }
+            Text(
+                text = "Expense Details",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurface
             )
-            
-            // Amount Input
-            OutlinedTextField(
-                value = uiState.amount,
-                onValueChange = viewModel::onAmountChanged,
-                label = { Text("Amount (₹)") },
-                modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                isError = uiState.amountError != null,
-                supportingText = uiState.amountError?.let { { Text(it) } },
-                leadingIcon = { Text("₹", style = MaterialTheme.typography.bodyLarge) }
-            )
-            
-            // Category Dropdown
-            CategoryDropdown(
-                selectedCategory = uiState.category,
-                onCategorySelected = viewModel::onCategoryChanged,
-                modifier = Modifier.fillMaxWidth()
-            )
-            
-            // Notes Input
-            OutlinedTextField(
-                value = uiState.notes,
-                onValueChange = viewModel::onNotesChanged,
-                label = { Text("Notes (Optional)") },
-                modifier = Modifier.fillMaxWidth(),
-                maxLines = 3,
-                supportingText = { Text("${uiState.notes.length}/100") }
-            )
+
+            Card(
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    // Title Input
+                    OutlinedTextField(
+                        value = uiState.title,
+                        onValueChange = viewModel::onTitleChanged,
+                        label = { Text("Title") },
+                        modifier = Modifier.fillMaxWidth(),
+                        isError = uiState.titleError != null,
+                        supportingText = uiState.titleError?.let { { Text(it) } },
+                        leadingIcon = { Icon(Icons.Default.Edit, contentDescription = null) }
+                    )
+
+                    // Amount Input
+                    OutlinedTextField(
+                        value = uiState.amount,
+                        onValueChange = viewModel::onAmountChanged,
+                        label = { Text("Amount") },
+                        modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                        isError = uiState.amountError != null,
+                        supportingText = uiState.amountError?.let { { Text(it) } },
+                        leadingIcon = { Icon(Icons.Default.CurrencyRupee, contentDescription = null) }
+                    )
+
+                    // Category Dropdown
+                    CategoryDropdown(
+                        selectedCategory = uiState.category,
+                        onCategorySelected = viewModel::onCategoryChanged,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    // Notes Input
+                    OutlinedTextField(
+                        value = uiState.notes,
+                        onValueChange = viewModel::onNotesChanged,
+                        label = { Text("Notes (Optional)") },
+                        modifier = Modifier.fillMaxWidth(),
+                        maxLines = 3,
+                        supportingText = { Text("${uiState.notes.length}/100") },
+                        leadingIcon = { Icon(Icons.Default.Description, contentDescription = null) }
+                    )
+                }
+            }
             
             // Receipt Image Section
             Card(
@@ -130,7 +154,7 @@ fun AddExpenseScreen(
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
                 )
             ) {
                 Column(
@@ -140,16 +164,21 @@ fun AddExpenseScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
+                    Text(
+                        text = "Receipt",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
                     Icon(
                         Icons.Default.CameraAlt,
                         contentDescription = "Receipt",
                         modifier = Modifier.size(40.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer
                     )
                     Text(
                         "Receipt Image (Optional)",
                         style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                         textAlign = TextAlign.Center
                     )
 
@@ -162,7 +191,7 @@ fun AddExpenseScreen(
                             Text(
                                 "No receipt added",
                                 style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         } else {
                             AsyncImage(
