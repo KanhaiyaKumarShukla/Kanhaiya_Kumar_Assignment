@@ -17,7 +17,7 @@ This repository includes all the required submission artifacts in the project ro
 - **AI Usage Summary**: see the "AI Usage Summary" section below (3–5 lines)
 - **Prompt Logs**: `PROMPT_LOGS.md`
 - **Checklist of Features Implemented**: `FEATURES_CHECKLIST.md`
-- **APK Download Link**: `docs/APK_LINK.md` (also linked above in this README)
+- **APK Download Link**: `docs/APK_LINK.md` (update with your public link)
 - **Screenshots**: `docs/screenshots/` folder
 - **Resume**: add `resume.pdf` in the root (a placeholder `resume.txt` is provided)
 - **Full Source Code**: this repository (Jetpack Compose UI, MVVM, clean & modular)
