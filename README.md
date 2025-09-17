@@ -121,13 +121,83 @@ This project extensively leveraged AI tools for:
 
 ## 📸 Screenshots
 
-Add PNG/JPG screenshots under `docs/screenshots/` and reference them here. Example:
+Below is a curated gallery of app screenshots (light and dark where available). All images are stored in the `images/` folder in the repository root.
 
-```markdown
-![Expense List](docs/screenshots/expense_list.png)
-![Add Expense](docs/screenshots/add_expense.png)
-![Reports](docs/screenshots/reports.png)
-```
+### 1) Home — Expense Tracker
+- Description: Main expense list with today’s total, grouping, filters, and animated FAB.
+
+Light:
+
+![Home (Light)](images/home_expense_tracker_light.jpg)
+
+Dark:
+
+![Home (Dark)](images/home_expense_tracker_dark.jpg)
+
+---
+
+### 2) Category Picker (Filter Dialog)
+- Description: Modern M3 dialog with icon, radio selection, scroll, Apply/Clear actions.
+
+Light:
+
+![Category Picker (Light)](images/category_picker_light.jpg)
+
+Dark:
+
+![Category Picker (Dark)](images/category_picker_dark.jpg)
+
+---
+
+### 3) Filtered Expenses by Category
+- Description: Expenses view filtered to a specific category with clear grouping.
+
+Light:
+
+![Filtered Category Expenses (Light)](images/flitered_category_expenses_light.jpg)
+
+Dark:
+
+![Filtered Category Expenses (Dark)](images/flitered_category_expenses_dark.jpg)
+
+---
+
+### 4) Reports — 7 Days Overview
+- Description: Category-wise and daily trend charts with polished cards.
+
+Light:
+
+![7 Days Report (Light)](images/seven_days_report_light.jpg)
+
+Dark:
+
+![7 Days Report (Dark)](images/seven_days_report_dark.jpg)
+
+---
+
+### 5) Today’s Expense — Category-wise Summary
+- Description: Snapshot of today’s spending broken down by category.
+
+Light:
+
+![Today Category-wise (Light)](images/todays_expense_categor_wise_expense_light.jpg)
+
+Dark:
+
+![Today Category-wise (Dark)](images/todays_expense_categor_wise_expense_dark.jpg)
+
+---
+
+### 6) Export Report (Format Picker)
+- Description: Export format selection dialog with radio buttons and Export/Cancel actions.
+
+Light:
+
+![Export Report Picker (Light)](images/export_report_picker_light.jpg)
+
+Dark:
+
+_Not applicable_
 
 ---
 
