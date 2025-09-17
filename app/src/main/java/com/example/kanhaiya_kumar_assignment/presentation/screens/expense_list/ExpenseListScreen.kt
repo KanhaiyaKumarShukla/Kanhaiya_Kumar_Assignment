@@ -204,7 +204,8 @@ fun ExpenseListScreen(
                             AnimatedExpenseCard(
                                 expense = expense,
                                 modifier = Modifier.fillMaxWidth(),
-                                isVisible = true
+                                isVisible = true,
+                                onClick = { onNavigateToDetail(expense.id) }
                             )
                         }
                     }

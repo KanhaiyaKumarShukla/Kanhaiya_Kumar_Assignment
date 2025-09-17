@@ -21,7 +21,8 @@ import java.time.format.DateTimeFormatter
 fun AnimatedExpenseCard(
     expense: Expense,
     modifier: Modifier = Modifier,
-    isVisible: Boolean = true
+    isVisible: Boolean = true,
+    onClick: () -> Unit = {}
 ) {
     val scale by animateFloatAsState(
         targetValue = if (isVisible) 1f else 0.8f,
@@ -45,6 +46,7 @@ fun AnimatedExpenseCard(
     ) {
         Card(
             modifier = modifier.scale(scale),
+            onClick = onClick,
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Row(
