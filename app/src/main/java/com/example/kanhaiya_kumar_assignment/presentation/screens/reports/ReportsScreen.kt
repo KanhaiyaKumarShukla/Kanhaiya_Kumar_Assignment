@@ -20,9 +20,6 @@ import com.example.kanhaiya_kumar_assignment.presentation.components.ReportSumma
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.kanhaiya_kumar_assignment.domain.model.CategoryTotal
 import com.example.kanhaiya_kumar_assignment.domain.model.DailyTotal
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -235,7 +232,7 @@ fun ReportsScreen(
         )
     }
 }
-/*
+
 // Preview with simulated data
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -341,4 +338,3 @@ private fun ReportsScreenPreview() {
     }
 }
 
-*/
